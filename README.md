@@ -54,15 +54,22 @@ However, through challenges one can improve to a higher level and become tougher
 
 # Resource Info
 
-Q-Baller Design & Prototype: The design and prototype of Q-Baller. A future prototype update will take place very soon. When the project is finished, the 3D model and engineering drawing will be uploaded.
+Q-Baller Design & Prototype:    The design and prototype of Q-Baller. The currently shown prototypes cannot satisfy control requirement. A future prototype update will take place very soon. When the project is finished, the 3D model and engineering drawing will be uploaded.
 
-Q-Baller Documentations: All the publications and thesis about Q-Baller. The thesis is planned to be finished by the end of 2017/03.
+Q-Baller Documentations:    All the publications and thesis about Q-Baller. The thesis is planned to be finished by the end of 2017/03.
 
-Q-Baller Embedded System: The embedded system is developed for STM32F407VET6 embedded controller (the JMechW Robotic Board). Schematics and IO usage information are included, but the detailed PCB design will not be offered. The embedded system code is developed based on the open source code by OpenEdv (http://www.openedv.com/). The system will be tested at the beginning of 2017/03.
+Q-Baller Embedded System:     The embedded system is developed for STM32F407VET6 embedded controller (the JMechW Robotic Board). Schematics and IO usage information are included, but the detailed PCB design will not be offered. The embedded system code is developed based on the open source code by OpenEdv (http://www.openedv.com/). The system will be tested at the beginning of 2017/03.
 
-Q-Baller Matlab - Modeling and Basic Controller Simulation: The modeling and controller designer are included. Note that the Dynamic  System codes are designed through Obj-Oriented programming, which are included in ~/QBallerDynamicSystem/CLASS folders.
+File Enclose Level: Main>
+                         PROJECT>
+                                 UTILITY>
+                                         DATA
+                                         ALGORITHM>
+                                                   SYSTEM
 
-Q-Baller Matlab - Simulation & Experiment HMI (Idea Presentation): The previously mentioned HMI, which include the 3D animation, real-time simulation, noise condition and support command based control and joystick control (xbox or playstation joysticks). It works well for the old modeling but has not yet been updated for the new dynamic model. The update and improvement will be made in the future.
+Q-Baller Matlab - Modeling and Basic Controller Simulation:     The modeling and controller designer are included. Note that the Dynamic  System codes are designed through Obj-Oriented programming, which are included in ~/QBallerDynamicSystem/CLASS folders.
+
+Q-Baller Matlab - Simulation & Experiment HMI (Idea Presentation):    The previously mentioned HMI, which include the 3D animation, real-time simulation, noise condition and support command based control and joystick control (xbox or playstation joysticks). It works well for the old modeling but has not yet been updated for the new dynamic model. The update and improvement will be made in the future.
 
 At the current stage many works are not yet finished. There are more to come in the future.
 
