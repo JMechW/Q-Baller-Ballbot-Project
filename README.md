@@ -1,6 +1,7 @@
 # Q-Baller - A Spherical Wheeled Robot (Ballbot) Project
 
 Jiamin Wang
+
 Latest Update: 2017/2/27
 
 Greetings, this is Jiamin Wang, currently a MS student majored in Mechanical Engineering at University of Missouri - Columbia. My current research areas include control and robotics.The Q-Baller Project is my Master's Research Project.
