@@ -60,10 +60,10 @@ Q-Baller Documentations:    All the publications and thesis about Q-Baller. The 
 
 Q-Baller Embedded System:     The embedded system is developed for STM32F407VET6 embedded controller (the JMechW Robotic Board). Schematics and IO usage information are included, but the detailed PCB design will not be offered. The embedded system code is developed based on the open source code by OpenEdv (http://www.openedv.com/). The system will be tested at the beginning of 2017/03.
 
-File Enclose Level: Main>
+File Inclusion Level: Main>
                          PROJECT>
                                  UTILITY>
-                                         DATA
+                                         DATA;
                                          ALGORITHM>
                                                    SYSTEM
 
