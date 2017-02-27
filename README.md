@@ -17,21 +17,21 @@ A contiunous gain-scheduled controller is designed for Q-Baller, which leads to 
 Future works will include a more user-friendly and powerful HMI, experimentation of the application of advanced control methods and artificial intelligience algorithms.
 
 # Project Timeline
-2015/9: Completion of the Mechanical Design;
+2015/09: Completion of the Mechanical Design;
 
 2015/11: Completion of the Mechanical Structure Prototype;
 
-2016/1: Completion of the Preliminary Electronic System Design;
+2016/01: Completion of the Preliminary Electronic System Design;
 
-2016/2: Completion of the Dynamic Modeling, Basic Control Study and Behavior Planning;
+2016/02: Completion of the Dynamic Modeling, Basic Control Study and Behavior Planning;
 
-2016/4: Completion of the Preliminary Simulation HMI (Idea Presentation);
+2016/04: Completion of the Preliminary Simulation HMI (Idea Presentation);
 
-2016/6: Corrected previous mistakes made in modeling and established a more detailed dynamic model;
+2016/06: Corrected previous mistakes made in modeling and established a more detailed dynamic model;
 
-2016/7: Completion of the Preliminary Electronic System Prototype;
+2016/07: Completion of the Preliminary Electronic System Prototype;
 
-2016/8: "Dynamic Modeling and Simulation of Q-Baller - A Spherical Wheeled Robot" accepted by ASIAN MMS 2016 & CCMMS 2016;
+2016/08: "Dynamic Modeling and Simulation of Q-Baller - A Spherical Wheeled Robot" accepted by ASIAN MMS 2016 & CCMMS 2016;
 
 2016/10: Completion of the Preliminary Embedded System;
 
@@ -39,9 +39,9 @@ Future works will include a more user-friendly and powerful HMI, experimentation
 
 2016/12: Completion of the JMechW Robotic Board controller design;
 
-2017/1: Completion of the Electronic System Update;
+2017/01: Completion of the Electronic System Update;
 
-2017/2: Updated the Embedded System and Improvement of the theoretic Gain-Scheduled LQR Controller (Through Delaunay Trangulation and Energy Level Operating Point Distribution).
+2017/02: Updated the Embedded System (from STM32F103ZET6 to STM32F407VET6) and Improvement of the theoretic Gain-Scheduled LQR Controller (Through Delaunay Trangulation and Energy Level Operating Point Distribution).
 
 # Challenges
 The challenges I am facing during the project includes:
@@ -51,5 +51,25 @@ The challenges I am facing during the project includes:
 3. The research resources are limited - equipments, environments and technical helps.
 
 However, through challenges one can improve to a higher level and become tougher in life. After all, the project is fun so there is nothing really to complain about, haha.:)
+
+# Resource Info
+
+Q-Baller Design & Prototype: The design and prototype of Q-Baller. A future prototype update will take place very soon. When the project is finished, the 3D model and engineering drawing will be uploaded.
+
+Q-Baller Documentations: All the publications and thesis about Q-Baller. The thesis is planned to be finished by the end of 2017/03.
+
+Q-Baller Embedded System: The embedded system is developed for STM32F407VET6 embedded controller (the JMechW Robotic Board). Schematics and IO usage information are included, but the detailed PCB design will not be offered. The embedded system code is developed based on the open source code by OpenEdv (http://www.openedv.com/). The system will be tested at the beginning of 2017/03.
+
+Q-Baller Matlab - Modeling and Basic Controller Simulation: The modeling and controller designer are included. Note that the Dynamic  System codes are designed through Obj-Oriented programming, which are included in ~/QBallerDynamicSystem/CLASS folders.
+
+Q-Baller Matlab - Simulation & Experiment HMI (Idea Presentation): The previously mentioned HMI, which include the 3D animation, real-time simulation, noise condition and support command based control and joystick control (xbox or playstation joysticks). It works well for the old modeling but has not yet been updated for the new dynamic model. The update and improvement will be made in the future.
+
+At the current stage many works are not yet finished. There are more to come in the future.
+
+Thank you for your time!
+
+
+
+
 
 
