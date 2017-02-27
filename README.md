@@ -9,18 +9,31 @@ Since 2005, there have been many spectacular Ballbot designs (https://en.wikiped
 
 # Timeline
 2015/9: Completion of the Mechanical Design;
+
 2015/11: Completion of the Mechanical Structure Prototype;
+
 2016/1: Completion of the Preliminary Electronic System Design;
+
 2016/2: Completion of the Dynamic Modeling and Basic Control Study;
+
 2016/4: Completion of the Preliminary Simulation HMI (Idea Presentation);
+
 2016/6: Corrected previous mistakes made in modeling and established a more detailed dynamic model;
+
 2016/7: Completion of the Preliminary Electronic System Prototype;
-2016/8: Dynamic Modeling and Simulation of Q-Baller - A Spherical Wheeled Robot accepted by ASIAN MMS 2016 & CCMMS 2016;
+
+2016/8: "Dynamic Modeling and Simulation of Q-Baller - A Spherical Wheeled Robot" accepted by ASIAN MMS 2016 & CCMMS 2016;
+
 2016/10: Completion of the Preliminary Embedded System;
+
 2016/11: Preliminary Electronic System did not work well due to the complexity of the system (too much noise). Therefore, a new electronic system planing is carried out to design a integrated robotic circuitry board;
+
 2016/12: Completion of the JMechW Robotic Board controller design;
-2017/1: Completion of the Electronic System Update.
+
+2017/1: Completion of the Electronic System Update;
+
 2017/2: Updated the embedded system and improvement
+
 
 # Challenges
 The challenges I am facing during the project includes:
