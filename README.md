@@ -10,7 +10,7 @@ The Q-Baller uses 4 Omni-Wheel friction drive systems. DC Motor is used to cut d
 
 The structure design adopts sheetmetal working techniques, resulting in a low manufacture cost.
 
-Dynamic modeling is thorough which includes the characteristics of the DC motors. The inputs of the system are now Voltage, instead of torque which can be easily controlled if servo motors are adopted.
+Dynamic modeling is detailed and flexible which includes the characteristics of the DC motors. The inputs of the system are now Voltage, instead of torque which can be easily controlled if servo motors are adopted.
 
 A contiunous gain-scheduled controller is designed for Q-Baller, which leads to some satisfying results.
 
