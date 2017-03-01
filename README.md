@@ -1,3 +1,6 @@
+# Latest Updates:
+2017-3-1: Take a look at the latest ballbot prototype! (https://github.com/JMechW/Q-Baller-Ballbot-Project/commit/d7971b9b09ed9e808e067f1a6abab5ae6fe8b033)
+
 # Q-Baller - A Spherical Wheeled Robot (Ballbot) Project
 Latest Update: 2017/2/27
 
