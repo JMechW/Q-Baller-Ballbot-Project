@@ -19,6 +19,37 @@ Related Variables:
 */
 #include "Usart.h"
 
+#if 1
+#pragma import(__use_no_semihosting)             
+//标准库需要的支持函数                 
+struct __FILE 
+{ 
+	int handle; 
+	/* Whatever you require here. If the only file you are using is */ 
+	/* standard output using printf() for debugging, no file handling */ 
+	/* is required. */ 
+}; 
+
+/* FILE is typedef’ d in stdio.h. */ 
+FILE __stdout;
+//Avoid Semihosting   
+void _sys_exit(int x) 
+{ 
+	x = x; 
+} 
+// Redefine fputc 
+int fputc(int ch, FILE *f)
+{      
+	while((USART1->SR&0X40)==0);
+	USART1->DR = (u8) ch;      
+	return ch;
+}
+#endif 
+
+
+
+
+
 void USART1_IRQHandler(void) 	//Designed for USART Transmission
 {
 	if(USART1->SR&(1<<5))	//IF GOT THE DATA
@@ -90,12 +121,15 @@ void USART2_IRQHandler(void)	//Designed for GyroScope
 	if(USART2->SR&(1<<5))	//IF GOT THE DATA
 	{
 		USART_RxBuffer[1]=USART2->DR; 
+		
 		USART2->SR&=~(1<<5);
 		
 		if(USART_RxCnt[1]>9)
 		{
 			if(Gyro_RxCheck==USART_RxBuffer[1])
 			{
+				
+				
 				u8 ii;
 				
 				switch (Gyro_RxType)
@@ -154,6 +188,7 @@ void USART2_IRQHandler(void)	//Designed for GyroScope
 			}
 			else
 			{
+					Gyro_RxType=0;
 					USART_RxCnt[1]=0;
 					return;
 			}

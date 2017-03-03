@@ -30,6 +30,64 @@ Encoder_Cycle_Raw		Variable; 6*1
 
 #include "Encoder.h"
 //Interrupt
+
+void TIM1_UP_TIM10_IRQHandler(void)//Encoder 5
+{
+	if(TIM1->SR&0X0001)
+	{
+		Sys_Error=3;		
+	}
+	
+	TIM1->SR|=~(1<<0);
+}
+
+void TIM8_UP_TIM13_IRQHandler(void)//Encoder 6
+{
+	if(TIM8->SR&0X0001)
+	{
+		Sys_Error=3;			
+	}
+	TIM8->SR|=~(1<<0);
+}
+
+void TIM2_IRQHandler(void)//Encoder 1
+{
+	if(TIM2->SR&0X0001)
+	{
+		Sys_Error=3;	
+	}
+	TIM2->SR|=~(1<<0);
+}
+
+void TIM3_IRQHandler(void)//Encoder 4
+{
+	if(TIM3->SR&0X0001)
+	{
+		Sys_Error=3;		
+	}
+	TIM3->SR|=~(1<<0);
+}
+
+void TIM4_IRQHandler(void)//Encoder 3
+{
+	if(TIM4->SR&0X0001)
+	{
+		Sys_Error=3;			
+	}
+	TIM4->SR|=~(1<<0);
+}
+
+void TIM5_IRQHandler(void)//Encoder 2
+{
+	if(TIM5->SR&0X0001)
+	{
+		Sys_Error=3;			
+	}
+	TIM5->SR|=~(1<<0);
+}
+
+
+/*
 void TIM1_UP_TIM10_IRQHandler(void)//Encoder 5
 {
 	if(TIM1->SR&0X0001)
@@ -47,7 +105,7 @@ void TIM1_UP_TIM10_IRQHandler(void)//Encoder 5
 		}			
 	}
 	
-	TIM1->SR&=~(1<<0);
+	TIM1->SR=0;
 }
 
 void TIM8_UP_TIM13_IRQHandler(void)//Encoder 6
@@ -66,7 +124,7 @@ void TIM8_UP_TIM13_IRQHandler(void)//Encoder 6
 			}
 		}			
 	}
-	TIM8->SR&=~(1<<0);
+	TIM8->SR=0;
 }
 
 void TIM2_IRQHandler(void)//Encoder 1
@@ -85,7 +143,7 @@ void TIM2_IRQHandler(void)//Encoder 1
 			}
 		}			
 	}
-	TIM2->SR&=~(1<<0);
+	TIM2->SR=0;
 }
 
 void TIM3_IRQHandler(void)//Encoder 4
@@ -104,7 +162,7 @@ void TIM3_IRQHandler(void)//Encoder 4
 			}
 		}			
 	}
-	TIM3->SR&=~(1<<0);
+	TIM3->SR=0;
 }
 
 void TIM4_IRQHandler(void)//Encoder 3
@@ -123,7 +181,7 @@ void TIM4_IRQHandler(void)//Encoder 3
 			}
 		}			
 	}
-	TIM4->SR&=~(1<<0);
+	TIM4->SR=0;
 }
 
 void TIM5_IRQHandler(void)//Encoder 2
@@ -142,9 +200,9 @@ void TIM5_IRQHandler(void)//Encoder 2
 			}
 		}			
 	}
-	TIM5->SR&=~(1<<0);
+	TIM5->SR=0;
 }
-
+*/
 
 
 //Initialization
@@ -156,12 +214,12 @@ void Encoder_Initialization(void)
 		RCC->AHB1ENR|=1<<0;
 		RCC->AHB1ENR|=1<<1;
 		GPIO_Set(GPIOA,PIN15,
-				GPIO_MODE_AF,GPIO_OTYPE_PP,
-				GPIO_SPEED_50M,GPIO_PUPD_NONE);
+				GPIO_MODE_AF,GPIO_OTYPE_OD,
+				GPIO_SPEED_50M,GPIO_PUPD_PU);
 		GPIO_AF_Set(GPIOA,15,1);
 		GPIO_Set(GPIOB,PIN3,
-				GPIO_MODE_AF,GPIO_OTYPE_PP,
-				GPIO_SPEED_50M,GPIO_PUPD_NONE);
+				GPIO_MODE_AF,GPIO_OTYPE_OD,
+				GPIO_SPEED_50M,GPIO_PUPD_PU);
 		GPIO_AF_Set(GPIOB,3,1);//Set CH1 CH2
 		IO_Mode[0]|=3<<4;
 		IO_Mode[0]|=3<<8;
@@ -189,6 +247,8 @@ void Encoder_Initialization(void)
 		
 		TIM2->CR1|=1<<0;	//Enable Timer
 		
+		Encoder_Status|=(1<<0);
+		
 		MY_NVIC_Init(0,2,TIM2_IRQn,2);
 	}
 	
@@ -197,12 +257,12 @@ void Encoder_Initialization(void)
 		RCC->APB1ENR|=1<<3;
 		RCC->AHB1ENR|=1<<0;
 		GPIO_Set(GPIOA,PIN0,
-				GPIO_MODE_AF,GPIO_OTYPE_PP,
-				GPIO_SPEED_50M,GPIO_PUPD_NONE);
+				GPIO_MODE_AF,GPIO_OTYPE_OD,
+				GPIO_SPEED_50M,GPIO_PUPD_PU);
 		GPIO_AF_Set(GPIOA,0,2);
-		GPIO_Set(GPIOA,PIN0,
-				GPIO_MODE_AF,GPIO_OTYPE_PP,
-				GPIO_SPEED_50M,GPIO_PUPD_NONE);
+		GPIO_Set(GPIOA,PIN1,
+				GPIO_MODE_AF,GPIO_OTYPE_OD,
+				GPIO_SPEED_50M,GPIO_PUPD_PU);
 		GPIO_AF_Set(GPIOA,1,2);//Set CH1 CH2			
 		IO_Mode[1]|=3<<4;
 		IO_Mode[1]|=3<<8;
@@ -230,6 +290,8 @@ void Encoder_Initialization(void)
 		
 		TIM5->CR1|=1<<0;	//Enable Timer
 		
+		Encoder_Status|=(1<<1);
+		
 		MY_NVIC_Init(0,2,TIM5_IRQn,2);
 	}
 	
@@ -238,12 +300,12 @@ void Encoder_Initialization(void)
 		RCC->APB1ENR|=1<<2;
 		RCC->AHB1ENR|=1<<3;
 		GPIO_Set(GPIOD,PIN12,
-				GPIO_MODE_AF,GPIO_OTYPE_PP,
-				GPIO_SPEED_50M,GPIO_PUPD_NONE);
+				GPIO_MODE_AF,GPIO_OTYPE_OD,
+				GPIO_SPEED_50M,GPIO_PUPD_PU);
 		GPIO_AF_Set(GPIOD,12,2);
-		GPIO_Set(GPIOB,PIN13,
-				GPIO_MODE_AF,GPIO_OTYPE_PP,
-				GPIO_SPEED_50M,GPIO_PUPD_NONE);
+		GPIO_Set(GPIOD,PIN13,
+				GPIO_MODE_AF,GPIO_OTYPE_OD,
+				GPIO_SPEED_50M,GPIO_PUPD_PU);
 		GPIO_AF_Set(GPIOD,13,2);//Set CH1 CH2				
 		IO_Mode[2]|=3<<4;
 		IO_Mode[2]|=3<<8;				
@@ -271,6 +333,8 @@ void Encoder_Initialization(void)
 		
 		TIM4->CR1|=1<<0;	//Enable Timer
 		
+		Encoder_Status|=(1<<2);
+		
 		MY_NVIC_Init(0,2,TIM4_IRQn,2);
 	}
 	
@@ -279,12 +343,12 @@ void Encoder_Initialization(void)
 		RCC->APB1ENR|=1<<1;
 		RCC->AHB1ENR|=1<<1;
 		GPIO_Set(GPIOB,PIN4,
-				GPIO_MODE_AF,GPIO_OTYPE_PP,
-				GPIO_SPEED_50M,GPIO_PUPD_NONE);
+				GPIO_MODE_AF,GPIO_OTYPE_OD,
+				GPIO_SPEED_50M,GPIO_PUPD_PU);
 		GPIO_AF_Set(GPIOB,4,2);
 		GPIO_Set(GPIOB,PIN5,
-				GPIO_MODE_AF,GPIO_OTYPE_PP,
-				GPIO_SPEED_50M,GPIO_PUPD_NONE);
+				GPIO_MODE_AF,GPIO_OTYPE_OD,
+				GPIO_SPEED_50M,GPIO_PUPD_PU);
 		GPIO_AF_Set(GPIOB,5,2);//Set CH1 CH2				
 		IO_Mode[3]|=3<<4;
 		IO_Mode[3]|=3<<8;
@@ -312,6 +376,8 @@ void Encoder_Initialization(void)
 		
 		TIM3->CR1|=1<<0;	//Enable Timer
 		
+		Encoder_Status|=(1<<3);
+		
 		MY_NVIC_Init(0,2,TIM3_IRQn,2);
 	}
 	
@@ -320,12 +386,12 @@ void Encoder_Initialization(void)
 		RCC->APB2ENR|=1<<0;
 		RCC->AHB1ENR|=1<<4;
 		GPIO_Set(GPIOE,PIN9,
-				GPIO_MODE_AF,GPIO_OTYPE_PP,
-				GPIO_SPEED_50M,GPIO_PUPD_NONE);
+				GPIO_MODE_AF,GPIO_OTYPE_OD,
+				GPIO_SPEED_50M,GPIO_PUPD_PU);
 		GPIO_AF_Set(GPIOE,9,1);
 		GPIO_Set(GPIOE,PIN11,
-				GPIO_MODE_AF,GPIO_OTYPE_PP,
-				GPIO_SPEED_50M,GPIO_PUPD_NONE);
+				GPIO_MODE_AF,GPIO_OTYPE_OD,
+				GPIO_SPEED_50M,GPIO_PUPD_PU);
 		GPIO_AF_Set(GPIOE,11,1);//Set CH1 CH2
 		IO_Mode[0]|=3<<0;
 		IO_Mode[1]|=3<<0;
@@ -353,6 +419,8 @@ void Encoder_Initialization(void)
 		
 		TIM1->CR1|=1<<0;	//Enable Timer
 		
+		Encoder_Status|=(1<<4);
+		
 		MY_NVIC_Init(0,2,TIM1_UP_TIM10_IRQn,2);	//Initialize Interupt Handle
 	}
 	
@@ -361,12 +429,12 @@ void Encoder_Initialization(void)
 		RCC->APB2ENR|=1<<1;
 		RCC->AHB1ENR|=1<<2;
 		GPIO_Set(GPIOC,PIN6,
-				GPIO_MODE_AF,GPIO_OTYPE_PP,
-				GPIO_SPEED_50M,GPIO_PUPD_NONE);
+				GPIO_MODE_AF,GPIO_OTYPE_OD,
+				GPIO_SPEED_50M,GPIO_PUPD_PU);
 		GPIO_AF_Set(GPIOC,6,3);
 		GPIO_Set(GPIOC,PIN7,
-				GPIO_MODE_AF,GPIO_OTYPE_PP,
-				GPIO_SPEED_50M,GPIO_PUPD_NONE);
+				GPIO_MODE_AF,GPIO_OTYPE_OD,
+				GPIO_SPEED_50M,GPIO_PUPD_PU);
 		GPIO_AF_Set(GPIOC,7,3);//Set CH1 CH2
 		IO_Mode[3]|=3<<12;
 		IO_Mode[3]|=3<<16;
@@ -393,6 +461,8 @@ void Encoder_Initialization(void)
 		TIM8->CNT=Encoder_Start[5];	//Start to Count from the number
 		
 		TIM8->CR1|=1<<0;	//Enable Timer
+		
+		Encoder_Status|=(1<<5);
 		
 		MY_NVIC_Init(0,2,TIM8_UP_TIM13_IRQn,2);	//Initialize Interupt Handle
 	}
@@ -422,4 +492,23 @@ u32 Encoder_Read(u8 num)
 				break;
 	}
 	return _output;
+}
+
+void Encoder_ManualRefill(u8 num, u16 refillamount)
+{
+	switch (num)
+	{
+		case 1: TIM2->CNT=refillamount;
+				break;
+		case 2: TIM5->CNT=refillamount;
+				break;
+		case 3: TIM4->CNT=refillamount;
+				break;
+		case 4: TIM3->CNT=refillamount;
+				break;
+		
+		default:  Sys_Error=8;
+				break;
+	}
+	return;
 }

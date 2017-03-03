@@ -77,40 +77,40 @@ void PWM_Initialization(void) //initialization of all ports
 				
 				switch (portnum)
 				{
-					case 0:GPIO_Set(GPIOA,1<<pinnum,
+					case 0:RCC->AHB1ENR|=1<<0;
+						   GPIO_Set(GPIOA,1<<pinnum,
 									GPIO_MODE_AF,GPIO_OTYPE_OD,
 									GPIO_SPEED_50M,GPIO_PUPD_NONE);
 						   GPIO_AF_Set(GPIOA,pinnum,
 									(groupnum<3? 1:(groupnum<6?2:3)));
-						   RCC->AHB1ENR|=1<<0;
 									break;
-					case 1:GPIO_Set(GPIOB,1<<pinnum,
+					case 1:RCC->AHB1ENR|=1<<1;
+						   GPIO_Set(GPIOB,1<<pinnum,
 									GPIO_MODE_AF,GPIO_OTYPE_OD,
 									GPIO_SPEED_50M,GPIO_PUPD_NONE);
-						   GPIO_AF_Set(GPIOA,pinnum,
+						   GPIO_AF_Set(GPIOB,pinnum,
 									(groupnum<3? 1:(groupnum<6?2:3)));
-						   RCC->AHB1ENR|=1<<1;
+						   		break;
+					case 2:RCC->AHB1ENR|=1<<2;
+						   GPIO_Set(GPIOC,1<<pinnum,
+									GPIO_MODE_AF,GPIO_OTYPE_OD,
+									GPIO_SPEED_50M,GPIO_PUPD_NONE);
+						   GPIO_AF_Set(GPIOC,pinnum,
+									(groupnum<3? 1:(groupnum<6?2:3)));
 									break;
-					case 2:GPIO_Set(GPIOC,1<<pinnum,
+					case 3:RCC->AHB1ENR|=1<<3;
+							GPIO_Set(GPIOD,1<<pinnum,
 									GPIO_MODE_AF,GPIO_OTYPE_OD,
 									GPIO_SPEED_50M,GPIO_PUPD_NONE);
-						   GPIO_AF_Set(GPIOA,pinnum,
+						   GPIO_AF_Set(GPIOD,pinnum,
 									(groupnum<3? 1:(groupnum<6?2:3)));
-						   RCC->AHB1ENR|=1<<2;
 									break;
-					case 3:GPIO_Set(GPIOD,1<<pinnum,
+					case 4:RCC->AHB1ENR|=1<<4;
+							GPIO_Set(GPIOE,1<<pinnum,
 									GPIO_MODE_AF,GPIO_OTYPE_OD,
 									GPIO_SPEED_50M,GPIO_PUPD_NONE);
-						   GPIO_AF_Set(GPIOA,pinnum,
+						   GPIO_AF_Set(GPIOE,pinnum,
 									(groupnum<3? 1:(groupnum<6?2:3)));
-						   RCC->AHB1ENR|=1<<3;
-									break;
-					case 4:GPIO_Set(GPIOE,1<<pinnum,
-									GPIO_MODE_AF,GPIO_OTYPE_OD,
-									GPIO_SPEED_50M,GPIO_PUPD_NONE);
-						   GPIO_AF_Set(GPIOA,pinnum,
-									(groupnum<3? 1:(groupnum<6?2:3)));
-						   RCC->AHB1ENR|=1<<4;
 									break;
 					default:break;
 				}
@@ -126,11 +126,11 @@ void PWM_Initialization(void) //initialization of all ports
 							
 							if((channelnum>0)&&(channelnum<3))
 							{
-								TIM1->CCMR1=0XD<(3+4*(channelnum-1));
+								TIM1->CCMR1|=0XD<<(3+8*(channelnum-1));
 							}
 							else if((channelnum>2)&&(channelnum<5))
 							{
-								TIM1->CCMR2=0XD<(3+4*(channelnum-3));
+								TIM1->CCMR2|=0XD<<(3+8*(channelnum-3));
 							}
 							
 							TIM1->CCER|=1<<(4*(channelnum-1));
@@ -147,13 +147,13 @@ void PWM_Initialization(void) //initialization of all ports
 							
 							if((channelnum>0)&&(channelnum<3))
 							{
-								TIM2->CCMR1=0XD<(3+4*(channelnum-1));
+								TIM2->CCMR1|=0XD<<(3+8*(channelnum-1));
 							}
 							else if((channelnum>2)&&(channelnum<5))
 							{
-								TIM2->CCMR2=0XD<(3+4*(channelnum-3));
+								TIM2->CCMR2|=0XD<<(3+8*(channelnum-3));
 							}
-							
+													
 							TIM2->CCER|=1<<(4*(channelnum-1));
 							TIM2->CR1|=1<<7;
 							TIM2->CR1|=1<<0;
@@ -167,11 +167,11 @@ void PWM_Initialization(void) //initialization of all ports
 							
 							if((channelnum>0)&&(channelnum<3))
 							{
-								TIM3->CCMR1=0XD<(3+4*(channelnum-1));
+								TIM3->CCMR1|=0XD<<(3+8*(channelnum-1));
 							}
 							else if((channelnum>2)&&(channelnum<5))
 							{
-								TIM3->CCMR2=0XD<(3+4*(channelnum-3));
+								TIM3->CCMR2|=0XD<<(3+8*(channelnum-3));
 							}
 							
 							TIM3->CCER|=1<<(4*(channelnum-1));
@@ -189,11 +189,11 @@ void PWM_Initialization(void) //initialization of all ports
 							
 							if((channelnum>0)&&(channelnum<3))
 							{
-								TIM4->CCMR1=0XD<(3+4*(channelnum-1));
+								TIM4->CCMR1|=0XD<<(3+8*(channelnum-1));
 							}
 							else if((channelnum>2)&&(channelnum<5))
 							{
-								TIM4->CCMR2=0XD<(3+4*(channelnum-3));
+								TIM4->CCMR2|=0XD<<(3+8*(channelnum-3));
 							}
 							
 							TIM4->CCER|=1<<(4*(channelnum-1));
@@ -211,11 +211,11 @@ void PWM_Initialization(void) //initialization of all ports
 							
 							if((channelnum>0)&&(channelnum<3))
 							{
-								TIM5->CCMR1=0XD<(3+4*(channelnum-1));
+								TIM5->CCMR1|=0XD<<(3+8*(channelnum-1));
 							}
 							else if((channelnum>2)&&(channelnum<5))
 							{
-								TIM5->CCMR2=0XD<(3+4*(channelnum-3));
+								TIM5->CCMR2|=0XD<<(3+8*(channelnum-3));
 							}
 							
 							TIM5->CCER|=1<<(4*(channelnum-1));
@@ -233,11 +233,11 @@ void PWM_Initialization(void) //initialization of all ports
 							
 							if((channelnum>0)&&(channelnum<3))
 							{
-								TIM8->CCMR1=0XD<(3+4*(channelnum-1));
+								TIM8->CCMR1|=0XD<<(3+8*(channelnum-1));
 							}
 							else if((channelnum>2)&&(channelnum<5))
 							{
-								TIM8->CCMR2=0XD<(3+4*(channelnum-3));
+								TIM8->CCMR2|=0XD<<(3+8*(channelnum-3));
 							}
 							
 							TIM8->CCER|=1<<(4*(channelnum-1));

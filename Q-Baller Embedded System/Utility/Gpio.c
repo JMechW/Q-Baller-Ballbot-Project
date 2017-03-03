@@ -40,8 +40,8 @@ void GPIO_Initialization(void)
 	u8 cnt2;
 	u8 activenum;
 	u8	modenum;
-	u32 portnum;
-	u32 pinnum;
+	u8 portnum;
+	u8 pinnum;
 	for (cnt1=0;cnt1<5;cnt1++)
 	{	
 		for (cnt2=0;cnt2<6;cnt2++)
@@ -54,23 +54,28 @@ void GPIO_Initialization(void)
 				pinnum=((IO_PortSetup[cnt1][cnt2]&0x0F));
 				switch (portnum)
 				{
-					case 0:GPIO_Set(GPIOA,1<<pinnum,
+					case 0:RCC->AHB1ENR|=1<<0;
+						   GPIO_Set(GPIOA,1<<pinnum,
 									((activenum<2)? 0:1),((cnt1>3)? 0:1),
 									GPIO_SPEED_2M,((cnt1>3)? 1:0));
 									break;
-					case 1:GPIO_Set(GPIOB,1<<pinnum,
+					case 1:RCC->AHB1ENR|=1<<1;
+						   GPIO_Set(GPIOB,1<<pinnum,
 									((activenum<2)? 0:1),((cnt1>3)? 0:1),
 									GPIO_SPEED_2M,((cnt1>3)? 1:0));
 									break;
-					case 2:GPIO_Set(GPIOC,1<<pinnum,
+					case 2:RCC->AHB1ENR|=1<<2;
+						   GPIO_Set(GPIOC,1<<pinnum,
 									((activenum<2)? 0:1),((cnt1>3)? 0:1),
 									GPIO_SPEED_2M,((cnt1>3)? 1:0));
 									break;
-					case 3:GPIO_Set(GPIOD,1<<pinnum,
+					case 3:RCC->AHB1ENR|=1<<3;
+						   GPIO_Set(GPIOD,1<<pinnum,
 									((activenum<2)? 0:1),((cnt1>3)? 0:1),
 									GPIO_SPEED_2M,((cnt1>3)? 1:0));
 									break;
-					case 4:GPIO_Set(GPIOE,1<<pinnum,
+					case 4:RCC->AHB1ENR|=1<<4;
+						   GPIO_Set(GPIOE,1<<pinnum,
 									((activenum<2)? 0:1),((cnt1>3)? 0:1),
 									GPIO_SPEED_2M,((cnt1>3)? 1:0));
 									break;
@@ -99,7 +104,7 @@ void GPIO_Write(u8 group,u8 member,u8 single)
 			modenum=(IO_Mode[cnt1]&(0xF<<((cnt2)*4)))>>((cnt2)*4);
 			if(modenum==2)
 			{
-				buffer=(GPIO_Buffer[cnt1]&(1<<cnt2));
+				buffer=single;
 				portnum=(IO_PortSetup[cnt1][cnt2]&0xF0)>>4;
 				pinnum=((IO_PortSetup[cnt1][cnt2]&0x0F));
 				switch (portnum)
